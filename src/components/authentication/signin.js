@@ -1,14 +1,45 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput} from 'react-native';
+import Button from '../common/button';
 
 export default class SignIn extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+    };
+    this.onPress = this.onPress.bind(this);
+  }
+
   render() {
     return (
       <View>
         <Text>Sign In</Text>
-        <TextInput style={styles.input}/>
+
+        <Text>Username:</Text>
+        <TextInput
+          style={styles.input}
+          value={this.state.username}
+          onChangeText={(text) => this.setState({username: text})}
+        />
+
+        <Text>Password:</Text>
+        <TextInput
+          secureTextEntry={true}
+          style={styles.input}
+          value={this.state.password}
+          onChangeText={(text) => this.setState({password: text})}
+        />
+
+        <Button text={'Sign In'} onPress={this.onPress}/>
       </View>
     );
+  }
+  onPress() {
+    this.setState({
+      password: '',
+    });
   }
 }
 
